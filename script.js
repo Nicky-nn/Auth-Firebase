@@ -19,14 +19,14 @@ signupForm.addEventListener("submit", (e) => {
 // Login Usuario
 
 const signinForm = d.querySelector("#login-form");
-signupForm.addEventListener("submit", (e) => {
+signinForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = d.querySelector("#login-email").value;
     const password = d.querySelector("#login-password").value;
 
     auth.signInWithEmailAndPassword(email, password).then((userCredential) => {
         signupForm.reset(); //Reseteamos input
-        $("#signupModal").modal("hide"); //Bootstrap el modal ocultamos
+        $("#signinModal").modal("hide"); //Bootstrap el modal ocultamos
         c("Logueado");
     });
 });
@@ -39,5 +39,41 @@ logout.addEventListener('click', e=> {
     auth.signOut().then(() => {
         c('Saliendo');
     })
+})
+
+
+// Publicaciones
+const postList = d.querySelector('.posts')
+const setupPost = data => {
+    if(data.length){
+        let html = '';
+        data.forEach(doc => {
+            const post =  doc.data()
+            const li = `
+                <li class= "list-group-item list-group-item-action">
+                    <h5>${post.title}</h5>
+                    <p>${post.description}</p>
+                </li>
+            `
+            html += li;
+        })
+        postList.innerHTML = html;
+    }
+    else{
+        postList.innerHTML = `<p class= "list-group-item list-group-item-action">Necesitas Entrar con tu Correo </p>`
+    }
+}
+//Eventos
+auth.onAuthStateChanged(user => { //Comprobar si esta logueado
+    if(user){
+        fs.collection('posts')
+            .get()
+            .then((snapshot) => {
+                setupPost(snapshot.docs)
+            })
+    }
+    else{
+        c('Sin loguear')
+    }
 })
 
