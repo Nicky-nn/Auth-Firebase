@@ -28,7 +28,7 @@ signinForm.addEventListener("submit", (e) => {
         (userCredential) => {
         signinForm.reset(); //Reseteamos input
         $("#signinModal").modal("hide"); //Bootstrap el modal ocultamos
-        
+        $("#navbarNav").collapse('hide');        
         c("Logueado");
     });
 });
@@ -39,6 +39,8 @@ const logout = d.querySelector('#logout')
 logout.addEventListener('click', e=> {
     e.preventDefault();
     auth.signOut().then(() => {
+        $("#navbarNav").collapse('hide');        
+
         c('Saliendo');
     })
 })
