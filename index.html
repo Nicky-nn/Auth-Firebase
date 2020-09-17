@@ -28,7 +28,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
+                        <li class="nav-item logged-out" style="display: none;">
                             <a
                                 class="nav-link"
                                 href="#"
@@ -37,7 +37,7 @@
                                 >Ingresar</a
                             >
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item logged-out" style="display: none;">
                             <a
                                 class="nav-link"
                                 href="#"
@@ -46,7 +46,7 @@
                                 >Registrarse</a
                             >
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item logged-in" style="display: none;">
                             <a class="nav-link" href="#" id="logout"
                                 >Cerrar Sesión</a
                             >
@@ -161,8 +161,14 @@
                                     required
                                 />
                             </div>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-secondary btn-block">
                                 Ingresar
+                            </button>
+                            <button type="button" class="btn btn-outline-danger btn-block" id="googleLogin">
+                                Ingresar con Google
+                            </button>
+                            <button type="button" class="btn btn-outline-info btn-block" id="faceLogin">
+                                Ingresar con Facebook
                             </button>
                         </form>
                     </div>
@@ -210,7 +216,7 @@
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
             firebase.analytics();
-            const auth = firebase.auth();
+            // const auth = firebase.auth();
             const fs = firebase.firestore();
         </script>
         <script src="script.js"></script>
