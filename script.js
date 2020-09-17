@@ -24,9 +24,11 @@ signinForm.addEventListener("submit", (e) => {
     const email = d.querySelector("#login-email").value;
     const password = d.querySelector("#login-password").value;
 
-    auth.signInWithEmailAndPassword(email, password).then((userCredential) => {
-        signupForm.reset(); //Reseteamos input
+    auth.signInWithEmailAndPassword(email, password).then(
+        (userCredential) => {
+        signinForm.reset(); //Reseteamos input
         $("#signinModal").modal("hide"); //Bootstrap el modal ocultamos
+        
         c("Logueado");
     });
 });
@@ -60,7 +62,7 @@ const setupPost = data => {
         postList.innerHTML = html;
     }
     else{
-        postList.innerHTML = `<p class= "list-group-item list-group-item-action">Necesitas Entrar con tu Correo </p>`
+        postList.innerHTML = `<h5 class= "list-group-item list-group-item-action">Necesitas Entrar con tu Correo </h5>`
     }
 }
 //Eventos
@@ -74,6 +76,8 @@ auth.onAuthStateChanged(user => { //Comprobar si esta logueado
     }
     else{
         c('Sin loguear')
+        postList.innerHTML = `<h5 class= "list-group-item list-group-item-action">Necesitas Entrar con tu Correo </h5>`
+
     }
 })
 
